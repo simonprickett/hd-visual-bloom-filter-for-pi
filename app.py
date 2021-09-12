@@ -12,6 +12,8 @@ COLOR_BIT_WRITING = (0, 255, 0)
 COLOR_BIT_QUERYING = (0, 0, 255) 
 NUM_TRANSITIONS = 4
 
+app = Flask(__name__)
+
 unicornhathd.rotation(90)
 unicornhathd.brightness(0.6)
 unicornhd_width, unicornhd_height = unicornhathd.get_shape()
@@ -19,17 +21,36 @@ unicornhathd.off()
 
 NUM_LEDS = unicornhd_width * unicornhd_height
 
-try:
-    #for y in range(u_height):
-    #    for x in range(u_width):
-    #        unicornhathd.set_pixel(x, y, 255, 0, 0)
+def get_led_position(led):
+    # TODO
+    return
 
-    unicornhathd.set_pixel(0, 0, 255, 0, 0)
-    unicornhathd.set_pixel(15, 15, 0, 0, 255)
-    unicornhathd.show()
+def toggle_leds(leds, transition_color, new_color):
+    # TODO
+    return
 
-    while True:
-        continue
+def query_led_status(led):
+    # TODO
+    return
 
-except KeyboardInterrupt:
-    unicornhathd.off()
+def set_led_status(leds):
+    # TODO
+    return
+
+def add_to_filter(element):
+    # TODO
+    return
+
+def exists_in_filter(element):
+    # TODO
+    return
+
+def reset_filter():
+    # TODO
+    return
+
+# TODO other routes...
+
+@app.route('/')
+def homepage():
+    return render_template('homepage.html')

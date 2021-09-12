@@ -1,1 +1,13 @@
-TODO
+Description=HD Bloom Filter Service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/hd-visual-bloom-filter-for-pi
+ExecStart=/home/pi/hd-visual-bloom-filter-for-pi/venv/bin/flask run --host=0.0.0.0
+Restart=on-failure
+User=root
+Environment=FLASK_APP=/home/pi/hd-visual-bloom-filter-for-pi/app.py
+TimeoutSec=90
+
+[Install]
+WantedBy=multi-user.target

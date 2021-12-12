@@ -42,12 +42,27 @@ def add_to_filter(element):
     return
 
 def exists_in_filter(element):
-    # TODO
-    return
+    for n in range(NUM_HASH_FUNCTIONS):
+        led = mm3.hash(element, n) % NUM_LEDS
+        print(str(led))
+
+        if (query_led_status(led) == False):
+            return False
+
+    return True
 
 def reset_filter():
-    # TODO
-    return
+    for n in range(2):
+        for x in range(unicornhd_width):
+            for y in range(unicornhd_height):
+                unicornhathd.set_pixel(x, y, 0, 0, 255)
+
+        unicornhathd.show()
+        time.sleep(0.3)
+        unicornhathd.off()
+        time.sleep(0.3)
+
+    return True
 
 @app.route(f'/{API_PATH_PREFIX}/add/<element>', methods=['POST'])
 def add(element):
@@ -64,3 +79,4 @@ def reset():
 @app.route('/')
 def homepage():
     return render_template('homepage.html')
+

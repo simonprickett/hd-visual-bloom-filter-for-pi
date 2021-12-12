@@ -25,8 +25,25 @@ def get_led_position(led):
     return (led % unicornhd_height, led // unicornhd_width)
 
 def toggle_leds(leds, transition_color, new_color):
-    # TODO
-    return
+    orig_colors = []
+
+    for led in leds:
+        # TODO can we unpack led into x, y
+        orig_colors.append(unicornhathd.get_pixel(led[0], led[1]))
+
+    for n in range(NUM_TRANSITIONS):
+        for l in range(len(leds)):
+            this_led = leds[l]
+            unicornhathd.set_pixel(this_led[0], this_led[1], transition_color[0], transition_color[1], transition_color[2])
+
+        unicornhathd.show()
+        time.sleep(0.3)
+
+        for l in range(len(leds)):
+            this_led = leds[l]
+            this_orig_color = orig_colors[l]
+            unicornhathd.set_pixel(this_led[0], this_led[1], new_color[0], new_color[1], new_color[2])
+            unicornhathd.show()
 
 def query_led_status(led):
     pos = get_led_position(led)

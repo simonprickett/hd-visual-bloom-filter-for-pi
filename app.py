@@ -22,16 +22,20 @@ unicornhathd.off()
 NUM_LEDS = unicornhd_width * unicornhd_height
 
 def get_led_position(led):
-    # TODO
-    return
+    return (led % unicornhd_height, led // unicornhd_width)
 
 def toggle_leds(leds, transition_color, new_color):
     # TODO
     return
 
 def query_led_status(led):
-    # TODO
-    return
+    pos = get_led_position(led)
+
+    # TODO can we unpack pos
+    r, g, b = unicornhathd.get_pixel(pos[0], pos[1])
+    toggle_leds([pos], COLOR_BIT_QUERYING, (r, g, b))
+
+    return not (r == 0 and g == 0 and b == 0)
 
 def set_led_status(leds):
     # TODO
@@ -43,7 +47,7 @@ def add_to_filter(element):
 
 def exists_in_filter(element):
     for n in range(NUM_HASH_FUNCTIONS):
-        led = mm3.hash(element, n) % NUM_LEDS
+        led = mmh3.hash(element, n) % NUM_LEDS
         print(str(led))
 
         if (query_led_status(led) == False):

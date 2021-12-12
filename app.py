@@ -14,7 +14,7 @@ NUM_TRANSITIONS = 4
 
 app = Flask(__name__)
 
-unicornhathd.rotation(90)
+unicornhathd.rotation(180)
 unicornhathd.brightness(0.6)
 unicornhd_width, unicornhd_height = unicornhathd.get_shape()
 unicornhathd.off()
@@ -28,7 +28,6 @@ def toggle_leds(leds, transition_color, new_color):
     orig_colors = []
 
     for led in leds:
-        # TODO can we unpack led into x, y
         orig_colors.append(unicornhathd.get_pixel(led[0], led[1]))
 
     for n in range(NUM_TRANSITIONS):
@@ -48,19 +47,30 @@ def toggle_leds(leds, transition_color, new_color):
 def query_led_status(led):
     pos = get_led_position(led)
 
-    # TODO can we unpack pos
     r, g, b = unicornhathd.get_pixel(pos[0], pos[1])
     toggle_leds([pos], COLOR_BIT_QUERYING, (r, g, b))
 
     return not (r == 0 and g == 0 and b == 0)
 
 def set_led_status(leds):
-    # TODO
-    return
+    led_positions = []
+
+    for led in leds:
+        led_positions.append(get_led_position(led))
+
+    toggle_leds(led_positions, COLOR_BIT_WRITING, COLOR_BIT_SET)
 
 def add_to_filter(element):
-    # TODO
-    return
+    leds = []
+
+    for n in range(NUM_HASH_FUNCTIONS):
+        led = mmh3.hash(element, n) % NUM_LEDS
+        print(str(led))
+
+        leds.append(led)
+
+    set_led_status(leds)
+    return True
 
 def exists_in_filter(element):
     for n in range(NUM_HASH_FUNCTIONS):

@@ -4,6 +4,8 @@ This is an update of my original Raspberry Pi / Pimoroni Unicorn Hat Visual Bloo
 
 This version uses the [Pimoroni Unicorn Hat HD](https://shop.pimoroni.com/products/unicorn-hat-hd) in place of the original [Unicorn Hat](https://shop.pimoroni.com/products/unicorn-hat) from the previous project.  The primary difference between the two is that the original Unicorn Hat has 64 individually programmable LEDs (a grid of 8 x 8), while the HD version has 256 (in a 16 x 16 grid arrangement).  The HD version uses a different Python library than the regular Unicorn Hat but this has basically the same API.  As both products are the same size, this means that the LEDs are smaller / more densely packed in the HD version.
 
+Besides the obvious hardware change from the Unicorn Hat to the Unicorn Hat HD, I also swapped the Raspberry Pi model A from the previous project for a [Raspberry Pi model 3B](https://www.raspberrypi.com/products/raspberry-pi-3-model-b/).  The Unicorn Hat HD doesn't require this, I just wanted to keep the previous project intact and had a 3B kicking around unused.
+
 The code for this project (see `app.py`) is very similar to that of the original project.  The primary differences are as follows:
 
 * Use of the `unicornhathd` ([documentation here](https://github.com/pimoroni/unicorn-hat-hd)) library rather than the original `unicornhat` one.

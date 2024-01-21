@@ -11,6 +11,7 @@ COLOR_BIT_SET = (255, 0, 0)
 COLOR_BIT_WRITING = (0, 255, 0)
 COLOR_BIT_QUERYING = (0, 0, 255) 
 NUM_TRANSITIONS = 4
+LED_TIME_DELAY = 0.5
 
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ def toggle_leds(leds, transition_color, new_color):
             unicornhathd.set_pixel(this_led[0], this_led[1], transition_color[0], transition_color[1], transition_color[2])
 
         unicornhathd.show()
-        time.sleep(0.3)
+        time.sleep(LED_TIME_DELAY)
 
         for l in range(len(leds)):
             this_led = leds[l]
@@ -89,9 +90,9 @@ def reset_filter():
                 unicornhathd.set_pixel(x, y, 0, 0, 255)
 
         unicornhathd.show()
-        time.sleep(0.3)
+        time.sleep(LED_TIME_DELAY)
         unicornhathd.off()
-        time.sleep(0.3)
+        time.sleep(LED_TIME_DELAY)
 
     return True
 
